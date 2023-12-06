@@ -1,4 +1,4 @@
-function Products() {
+function Produk() {
   return (
     <div>
       <h1>Ini Product Page</h1>
@@ -6,4 +6,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default Produk;
