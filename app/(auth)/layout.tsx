@@ -7,7 +7,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <Paper
         sx={{
           width: '100%',
-          maxWidth: 450,
+          maxWidth: 400,
           py: 6,
           px: 4,
         }}
