@@ -17,7 +17,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             width={'100%'}
           >
             <Navbar />
-            {children}
+            <Box
+              sx={{
+                display: 'flex',
+                py: 4,
+                px: 4,
+                bgcolor: 'aliceblue',
+                minHeight: '100vh',
+                maxHeight: '100vh',
+              }}
+            >
+              {children}
+            </Box>
           </Box>
         </Box>
       </OpenDrawerProvider>
