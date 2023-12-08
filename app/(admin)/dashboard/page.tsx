@@ -1,35 +1,17 @@
 'use client';
-import ProductCard from '@/components/product-card';
-import {
-  Box,
-  TextField,
-  Typography,
-  Paper,
-  List,
-  ListItem,
-  ListItemText,
-  IconButton,
-  Button,
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import ProductCardList from '@/components/productCardList';
+import { Box, TextField, Typography, Paper, List, Button } from '@mui/material';
 import { useState } from 'react';
-
-const dummyProducts = [
-  { id: 1, name: 'Produk A', harga: 100 },
-  { id: 2, name: 'Produk B', harga: 150 },
-  { id: 3, name: 'Produk C', harga: 200 },
-  { id: 4, name: 'Produk D', harga: 75 },
-  { id: 5, name: 'Produk E', harga: 32 },
-  { id: 6, name: 'Produk F', harga: 324 },
-  { id: 7, name: 'Produk G', harga: 922 },
-  { id: 8, name: 'Produk H', harga: 100 },
-];
+import { products } from '@/lib/products';
+import { useCartContext } from '@/context/CartContext';
+import Cart from '@/components/cart';
 
 function Dashboard() {
   const [name, setName] = useState<string | number>('');
+
   return (
     <>
-      <Box>
+      <Box sx={{ flexGrow: 8 }}>
         <form>
           <TextField
             id='cari-produk'
@@ -50,55 +32,25 @@ function Dashboard() {
             flexWrap: 'wrap',
           }}
         >
-          {dummyProducts.map((p) => (
-            <ProductCard
-              key={p.id}
-              name={p.name}
-              harga={p.harga}
-            ></ProductCard>
-          ))}
-        </Box>
-      </Box>
-      <Box sx={{ width: '800px' }}>
-        <Paper sx={{ width: '100%', py: 4, px: 4 }}>
-          <Typography
-            variant='h2'
-            fontSize='24px'
-            fontWeight={500}
+          <List
+            dense={false}
+            sx={{ overflowY: 'scroll', width: '100%', maxHeight: '70vh' }}
           >
-            Keranjang
-          </Typography>
-          <List>
-            {dummyProducts.map((p) => (
-              <ListItem
+            {products.map((p, i) => (
+              <ProductCardList
                 key={p.id}
-                secondaryAction={
-                  <IconButton
-                    edge='end'
-                    aria-label='delete'
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                }
-              >
-                <ListItemText
-                  primary={p.name}
-                  secondary={p.harga}
-                />
-              </ListItem>
+                number={i + 1}
+                id={p.id}
+                name={p.name}
+                harga={p.harga}
+                hargaSatuan={p.harga}
+              />
             ))}
           </List>
-          <Typography>Total Harga:</Typography>
-          <Box>
-            <Button
-              variant='contained'
-              color='error'
-            >
-              Hapus Barang
-            </Button>
-            <Button variant='contained'>Simpan transaksi</Button>
-          </Box>
-        </Paper>
+        </Box>
+      </Box>
+      <Box sx={{ maxHeight: '75vh', flexGrow: 1 }}>
+        <Cart />
       </Box>
     </>
   );

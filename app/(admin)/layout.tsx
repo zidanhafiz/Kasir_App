@@ -1,5 +1,6 @@
 import Navbar from '@/components/navbar';
 import Sidebar from '@/components/sidebar';
+import { CartContextProvider } from '@/context/CartContext';
 import { OpenDrawerProvider } from '@/context/OpenDrawer';
 import { Box } from '@mui/material';
 
@@ -7,30 +8,34 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <>
       <OpenDrawerProvider>
-        <Box
-          component='div'
-          display={'flex'}
-        >
-          <Sidebar />
+        <CartContextProvider>
           <Box
             component='div'
-            width={'100%'}
+            display={'flex'}
+            maxHeight={'100vh'}
+            overflow='hidden'
           >
-            <Navbar />
+            <Sidebar />
             <Box
-              sx={{
-                display: 'flex',
-                py: 4,
-                px: 4,
-                bgcolor: 'aliceblue',
-                minHeight: '100vh',
-                maxHeight: '100vh',
-              }}
+              component='div'
+              width={'100%'}
             >
-              {children}
+              <Navbar />
+              <Box
+                sx={{
+                  display: 'flex',
+                  columnGap: 4,
+                  py: 4,
+                  px: 4,
+                  bgcolor: 'aliceblue',
+                  height: '100vh',
+                }}
+              >
+                {children}
+              </Box>
             </Box>
           </Box>
-        </Box>
+        </CartContextProvider>
       </OpenDrawerProvider>
     </>
   );
