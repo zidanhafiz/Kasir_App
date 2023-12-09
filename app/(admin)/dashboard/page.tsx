@@ -10,7 +10,7 @@ function Dashboard() {
   const [name, setName] = useState<string | number>('');
 
   return (
-    <>
+    <Box sx={{ display: 'flex', columnGap: 4, mt: 2 }}>
       <Box sx={{ flexGrow: 8 }}>
         <form>
           <TextField
@@ -49,10 +49,10 @@ function Dashboard() {
           </List>
         </Box>
       </Box>
-      <Box sx={{ maxHeight: '75vh', flexGrow: 1 }}>
+      <Box sx={{ maxHeight: '70vh', flexGrow: 1 }}>
         <Cart />
       </Box>
-    </>
+    </Box>
   );
 }
 
