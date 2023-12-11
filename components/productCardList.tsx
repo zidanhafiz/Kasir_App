@@ -1,43 +1,49 @@
 'use client';
 import { Typography, ListItem, ListItemText, Button } from '@mui/material';
 import { useCartContext } from '@/context/CartContext';
+import { useEffect, useState } from 'react';
+import { toRupiah } from '@/lib/toRupiah';
 
 type Props = {
   number: number;
-  id: number;
+  id: string;
   name: string;
-  harga: number;
-  hargaSatuan: number;
+  price: number;
   children?: React.ReactNode;
 };
 
-export default function ProductCardList({ number, id, name, harga, hargaSatuan }: Props) {
+export default function ProductCardList({ number, id, name, price }: Props) {
+  const { cartProducts, updateCartItem, addCartItem } = useCartContext();
+  const hargaRp = toRupiah(price);
   const title = `${name} (${id})`;
-  const { cartProducts, setCartProducts, toRupiah } = useCartContext();
-  const hargaRp = toRupiah(harga);
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     let isExist = false;
-    const products = [...cartProducts];
-    products.map((p) => {
+    cartProducts.map((p, i) => {
       if (p.id === id) {
-        p.quantity = p.quantity + 1;
-        p.harga = hargaSatuan * p.quantity;
-        isExist = true;
+        const quantity = p.quantity + 1;
+        const newProduct = {
+          id,
+          name,
+          price,
+          quantity,
+          total_price: quantity * p.price,
+        };
+        updateCartItem(newProduct, i);
+        return (isExist = true);
       }
     });
-
     if (!isExist) {
-      const product = {
+      const quantity = 1;
+      const newProduct = {
         id,
         name,
-        harga,
-        hargaSatuan,
-        quantity: 1,
+        price,
+        quantity,
+        total_price: quantity * price,
       };
-      products.push(product);
+      return addCartItem(newProduct);
     }
-    setCartProducts(products);
   };
 
   return (

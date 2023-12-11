@@ -1,13 +1,20 @@
-'use client';
 import ProductCardList from '@/components/productCardList';
 import { Box, TextField, Typography, Paper, List, Button } from '@mui/material';
-import { useState } from 'react';
-import { products } from '@/lib/products';
-import { useCartContext } from '@/context/CartContext';
+// import { useCartContext } from '@/context/CartContext';
 import Cart from '@/components/cart';
 
-function Dashboard() {
-  const [name, setName] = useState<string | number>('');
+const getData = async () => {
+  const res = await fetch('http://localhost:3000/api/products', {
+    next: { revalidate: 3600 },
+  });
+  if (!res.ok) {
+    throw new Error('Failed get data');
+  }
+  return res.json();
+};
+
+async function Dashboard() {
+  const products: Product[] = await getData();
 
   return (
     <Box sx={{ display: 'flex', columnGap: 4, mt: 2 }}>
@@ -19,8 +26,6 @@ function Dashboard() {
             variant='standard'
             type='text'
             required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
           />
         </form>
         <Box
@@ -36,14 +41,13 @@ function Dashboard() {
             dense={false}
             sx={{ overflowY: 'scroll', width: '100%', maxHeight: '70vh' }}
           >
-            {products.map((p, i) => (
+            {products?.map((p, i) => (
               <ProductCardList
                 key={p.id}
                 number={i + 1}
                 id={p.id}
                 name={p.name}
-                harga={p.harga}
-                hargaSatuan={p.harga}
+                price={p.price}
               />
             ))}
           </List>

@@ -47,7 +47,12 @@ function Login() {
         >
           Lupa password?
         </Link>
-        <Button variant='contained'>Masuk</Button>
+        <Button
+          variant='contained'
+          onClick={() => router.push('/dashboard')}
+        >
+          Masuk
+        </Button>
       </Box>
     </>
   );

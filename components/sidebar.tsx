@@ -66,10 +66,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   })
 );
 const list = [
-  { name: 'Dashboard', link: '/dashboard', icon: [<HomeIcon />] },
-  { name: 'Produk', link: '/produk', icon: [<InventoryIcon />] },
-  { name: 'Riwayat', link: '/riwayat', icon: [<HistoryIcon />] },
-  { name: 'Pengaturan', link: '/pengaturan', icon: [<SettingsIcon />] },
+  { name: 'Dashboard', link: '/dashboard', icon: [<HomeIcon key={1} />] },
+  { name: 'Produk', link: '/produk', icon: [<InventoryIcon key={1} />] },
+  { name: 'Riwayat', link: '/riwayat', icon: [<HistoryIcon key={1} />] },
+  { name: 'Pengaturan', link: '/pengaturan', icon: [<SettingsIcon key={1} />] },
 ];
 
 function Sidebar() {
@@ -89,7 +89,7 @@ function Sidebar() {
       </DrawerHeader>
       <Divider />
       <List>
-        {list.map((l) => (
+        {list.map((l, i) => (
           <ListItem
             key={l.name}
             disablePadding
