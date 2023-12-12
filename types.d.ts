@@ -15,3 +15,8 @@ type CartProduct = {
   quantity: number;
   total_price: number;
 };
+
+type Filter = {
+  name: string;
+  category: string;
+}
