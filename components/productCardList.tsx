@@ -27,7 +27,7 @@ export default function ProductCardList({ number, id, name, price }: Props) {
           name,
           price,
           quantity,
-          total_price: quantity * p.price,
+          total_price: quantity * price,
         };
         updateCartItem(newProduct, i);
         return (isExist = true);
@@ -45,7 +45,6 @@ export default function ProductCardList({ number, id, name, price }: Props) {
       return addCartItem(newProduct);
     }
   };
-
   return (
     <ListItem
       sx={{ borderBottom: 1, borderColor: 'rgba(0,0,0, 0.3)' }}

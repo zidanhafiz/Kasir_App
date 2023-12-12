@@ -1,6 +1,5 @@
 import ProductCardList from '@/components/productCardList';
 import { Box, TextField, Typography, Paper, List, Button } from '@mui/material';
-// import { useCartContext } from '@/context/CartContext';
 import Cart from '@/components/cart';
 
 const getData = async () => {

@@ -5,6 +5,27 @@ import { useCartContext } from '@/context/CartContext';
 import { useState, useEffect } from 'react';
 import { toRupiah } from '@/lib/toRupiah';
 
+function ListContainer({ cartProducts }: { cartProducts: CartProduct[] }) {
+  if (cartProducts.length === 0) {
+    return (
+      <Typography sx={{ textAlign: 'center', my: 2, fontStyle: 'italic' }}>
+        Keranjang Kosong
+      </Typography>
+    );
+  }
+  return cartProducts.map((p, i) => (
+    <CartList
+      index={i}
+      key={p.id}
+      id={p.id}
+      name={p.name}
+      quantity={p.quantity}
+      price={p.price}
+      total_price={p.total_price}
+    />
+  ));
+}
+
 function Cart() {
   const { cartProducts, clearCart } = useCartContext();
   const [total, setTotal] = useState<number>(0);
@@ -39,21 +60,7 @@ function Cart() {
         dense={true}
         sx={{ overflowY: 'scroll' }}
       >
-        {cartProducts.length === 0 ? (
-          <Typography sx={{ textAlign: 'center', my: 2, fontStyle: 'italic' }}>
-            Keranjang Kosong
-          </Typography>
-        ) : (
-          cartProducts?.map((p) => (
-            <CartList
-              key={p.id}
-              id={p.id}
-              name={p.name}
-              quantity={p.quantity}
-              totalPrice={p.total_price}
-            />
-          ))
-        )}
+        <ListContainer cartProducts={cartProducts} />
       </List>
       <Box sx={{ my: 4, display: 'flex', justifyContent: 'space-between' }}>
         <Typography sx={{ fontSize: '18px' }}>Total Harga:</Typography>

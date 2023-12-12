@@ -21,7 +21,7 @@ const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const updateCartItem = (product: CartProduct, index: number) => {
     const temp = [...cartProducts];
-    temp[index] = product;
+    temp[index] = { ...product };
     setCartProducts(temp);
   };
 
