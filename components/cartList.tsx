@@ -2,31 +2,10 @@
 import { ListItem, ListItemText, IconButton, Typography, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { toRupiah } from '@/lib/toRupiah';
 import { useCartContext } from '@/context/CartContext';
 import ModalEditItem from './modalEditItem';
-
-function ChangeQt() {
-  const { updateCartItem } = useCartContext();
-  return (
-    <>
-      <IconButton
-        edge='end'
-        aria-label='edit'
-        sx={{ mr: 1 }}
-      >
-        <EditIcon />
-      </IconButton>
-      <IconButton
-        edge='end'
-        aria-label='delete'
-      >
-        <DeleteIcon />
-      </IconButton>
-    </>
-  );
-}
 
 type Props = CartProduct & {
   index: number;

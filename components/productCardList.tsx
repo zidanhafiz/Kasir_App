@@ -1,7 +1,6 @@
 'use client';
 import { Typography, ListItem, ListItemText, Button } from '@mui/material';
 import { useCartContext } from '@/context/CartContext';
-import { useEffect, useState } from 'react';
 import { toRupiah } from '@/lib/toRupiah';
 
 type Props = {
